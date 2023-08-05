@@ -1,15 +1,26 @@
 //  Comon section //
+
 const fs = require("fs");
 
 // Main section//
+
 partOne();
+partTwo();
 
 // Functions section //
+
 function partOne() {
   const input = fetchInputData();
-  // const input = "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw";
-  const position = findPosition(input);
+  const packetMarker = 4;
+  const position = findPosition(input, packetMarker);
   print("Part One", position);
+}
+
+function partTwo() {
+  const input = fetchInputData();
+  const packetMarker = 14;
+  const position = findPosition(input, packetMarker);
+  print("Part Two", position);
 }
 
 function fetchInputData() {
@@ -17,11 +28,11 @@ function fetchInputData() {
   return getInput;
 }
 
-function findPosition(signal) {
+function findPosition(signal, pMarker) {
   let positionIndex = 0;
 
   for (let i = 0; i < signal.length; i++) {
-    let section = signal.substring(i, i + 4);
+    let section = signal.substring(i, i + pMarker);
     const hasDuplicate = checkDuplicate(section);
     if (!hasDuplicate) {
       positionIndex = i + section.length;
